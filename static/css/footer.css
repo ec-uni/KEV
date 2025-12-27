@@ -1,0 +1,80 @@
+/* ============================= */
+/* FOOTER PRINCIPALE             */
+/* ============================= */
+footer {
+  gap: clamp(1vw, 2vw, 3vw);
+  flex-wrap: wrap;
+}
+
+/* Logo */
+footer .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .logo-container .logo {
+  width: clamp(8vh, 15vw + 5vh, 20vh);
+  heigth: auto;
+  object-fit: contain;
+  transition: height 0.3s ease;
+}
+
+/* Nav Links */
+footer .nav-links {
+  flex: 1;
+  gap: clamp(0.5vh, 1vw, 1.5vh);
+  margin: 0;
+  padding: 0;
+}
+
+footer .nav-links a,
+footer .nav-links p {
+  font-size: clamp(1rem, 2vw + 1vh, 9.8rem);
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+  line-height: 1.2;
+  margin: 0.3vh 0;
+  text-align: left;
+  transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+footer .nav-links a:hover {
+  color: red;
+}
+
+/* ============================= */
+/* MOBILE: logo sotto i testi     */
+/* ============================= */
+@media (max-width: 768px) {
+  footer {
+    display:flex;
+    flex-direction: column-reverse; /* logo sotto i testi */
+    align-items: center;
+    padding: clamp(1vh, 2vw, 2.5vh) clamp(3vw, 4vw, 5vw);
+    gap: clamp(1.5vh, 2vw, 2.5vh);
+  }
+
+  footer .logo-container {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  footer .logo-container .logo {
+    height: clamp(6vh, calc(13vh + 8vw), 20vh);
+    width: auto;
+  }
+
+  footer .nav-links {
+    width: 100%;
+    align-items: center; /* testi centrati */
+    gap: clamp(0.5vh, 1vw, 1vh);
+  }
+
+  footer .nav-links a,
+  footer .nav-links p {
+    font-size: clamp(0.9rem, 1vw + 1vh, 1rem);
+    text-align: center;
+  }
+}

@@ -1,0 +1,141 @@
+/* =============================== */
+/* 🎨 VARIABILI GLOBALI           */
+/* =============================== */
+:root {
+  /* Spaziature */
+  --space-xs: 0.5vh;
+  --space-sm: 1vh;
+  --space-md: 2vh;
+  --space-lg: 4vh;
+
+  /* Dimensioni */
+  --container-width: 95vw;
+  --container-radius: 10px;
+
+  /* Padding */
+  --padding-y: clamp(0.5vh, 1vw, 2vh);
+  --padding-x: clamp(2vw, 4vw, 5vw);
+
+  /* Gap */
+  --grid-gap-sm: 1rem;
+  --grid-gap-md: 2rem;
+  --grid-gap-lg: 4rem;
+
+  /* Colori */
+  --body-bg: yellow;
+  --header-gradient: linear-gradient(
+    to bottom,
+    #6a89e7 0%,
+    #7a98ea 20%,
+    #8ca1ed 40%,
+    #9fb8f0 60%,
+    #b3c0f3 75%,
+    #c8d4f7 100%
+  );
+}
+
+/* =============================== */
+/* 🌍 STRUTTURA BASE              */
+/* =============================== */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--body-bg);
+}
+
+main {
+  flex: 1;
+}
+
+/* =============================== */
+/* 📦 HEADER & FOOTER             */
+/* =============================== */
+.main-header-footer {
+  background: var(--header-gradient);
+  border-style: double;
+}
+
+/* =============================== */
+/* 📦 CONTAINER GENERICI          */
+/* =============================== */
+
+.m-cont {
+  border-radius: var(--container-radius);
+  width: var(--container-width);
+  height: fit-content;
+  margin: clamp(var(--space-xs), 1vw, var(--space-md)) auto 0 auto;
+  padding: var(--padding-y) var(--padding-x);
+  box-sizing: border-box;
+}
+
+.cont-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.cont-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =============================== */
+/* 📐 GRID UTILITY CLASSES        */
+/* =============================== */
+
+.cont-grid {
+  display: grid;
+  width: var(--container-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: var(--container-radius);
+  padding: var(--grid-gap-md);
+  gap: var(--grid-gap-md);
+}
+
+/* Colonne fisse */
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Layout frazionati */
+.grid-1-2 { grid-template-columns: 1fr 2fr; }
+.grid-2-1 { grid-template-columns: 2fr 1fr; }
+.grid-1-3 { grid-template-columns: 1fr 3fr; }
+.grid-3-1 { grid-template-columns: 3fr 1fr; }
+
+/* Responsive automatico */
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-auto-sm {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Gap utilità */
+.grid-gap-sm { gap: var(--grid-gap-sm); }
+.grid-gap-md { gap: var(--grid-gap-md); }
+.grid-gap-lg { gap: var(--grid-gap-lg); }
+
+/* =============================== */
+/* 📱 MOBILE RESPONSIVE          */
+/* =============================== */
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-1-2,
+  .grid-2-1,
+  .grid-1-3,
+  .grid-3-1 {
+    grid-template-columns: 1fr !important;
+  }
+}
+

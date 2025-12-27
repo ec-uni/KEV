@@ -1,0 +1,27 @@
+
+.keyboard
+{
+	width:100%;
+	background-color:grey;
+	padding: 10px;
+}
+.keyboard-row
+{
+	padding: 1px;
+	gap:5px
+}
+.keyboard-key
+{
+	display:flex;
+	flex:1;
+	background-color: #373b41;
+	align-items:center;
+	justify-content:center;
+}
+.keyboard-key > p
+{
+	font-size: 2.5rem;	
+	color:#c5c8c6;
+	
+}
+
