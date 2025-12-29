@@ -1,10 +1,12 @@
+// Keyboard Highlighting + Detection
 document.addEventListener("keydown", function(event) {
-    const key = event.key.toLowerCase(); // il tasto premuto
+    const key = event.key;//.toLowerCase(); // il tasto premuto
     const tasti = document.querySelectorAll(".keyboard-key p"); // tutti i <p>
-
+	console.log(key);
     tasti.forEach(tasto => {
-        if (tasto.textContent.toLowerCase() === key) {
+        if (tasto.textContent/*.toLowerCase()*/ === key	) {
             const parent = tasto.parentElement;
+	    console.log(key);
             parent.style.backgroundColor = "#b294bb";
             
             // torna al colore originale dopo 200ms
@@ -16,11 +18,11 @@ document.addEventListener("keydown", function(event) {
 });
 
 
-
-const select = document.querySelector("#Theme");
-select.addEventListener("change", () => {
-  console.log("Hai switchato tema: ",select.value);
-  if (select.value == "Light") {
+// Theme Selection
+const theme_selection = document.querySelector("#Theme");
+theme_selection.addEventListener("change", () => {
+  console.log("Hai switchato tema: ",theme_selection.value);
+  if (theme_selection.value == "Light") {
 	  document.body.style.backgroundColor = "#ffffff";
 	  document.body.style.color = "#000000";
   }
@@ -29,3 +31,8 @@ select.addEventListener("change", () => {
   }
 });
 
+// Keyboard Layout Selection
+const layout_selector = document.querySelector("#Keyboard-Layout"); 
+layout_selector.addEventListener("change", () => {
+	console.log("Function Keyboard Layout");
+});
