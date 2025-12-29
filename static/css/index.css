@@ -1,12 +1,26 @@
 
 .keyboard
 {
-	width:100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width:60%;
 	background-color:grey;
-	padding: 10px;
+	/*padding: 10px;*/
 }
 .keyboard-row
 {
+	border-radius: var(--container-radius);
+	width: 100%;
+	height: fit-content;
+	/*margin: clamp(var(--space-xs), 1vw, var(--space-md)) auto 0 auto;*/
+	padding: var(--padding-y) var(--padding-x);
+	box-sizing: border-box;	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	padding: 1px;
 	gap:5px
 }
@@ -20,8 +34,12 @@
 }
 .keyboard-key > p
 {
-	font-size: 2.5rem;	
+	font-size: 1.5rem;	
 	color:#c5c8c6;
 	
 }
-
+.space
+{
+	flex: 6; 
+	height: fit-content;
+}

@@ -4,9 +4,8 @@ document.addEventListener("keydown", function(event) {
     const tasti = document.querySelectorAll(".keyboard-key p"); // tutti i <p>
 	console.log(key);
     tasti.forEach(tasto => {
-        if (tasto.textContent/*.toLowerCase()*/ === key	) {
+        if (tasto.textContent /*.toLowerCase()*/ === key	) {
             const parent = tasto.parentElement;
-	    console.log(key);
             parent.style.backgroundColor = "#b294bb";
             
             // torna al colore originale dopo 200ms
