@@ -15,3 +15,17 @@ document.addEventListener("keydown", function(event) {
     });
 });
 
+
+
+const select = document.querySelector("#Theme");
+select.addEventListener("change", () => {
+  console.log("Hai switchato tema: ",select.value);
+  if (select.value == "Light") {
+	  document.body.style.backgroundColor = "#ffffff";
+	  document.body.style.color = "#000000";
+  }
+  else {document.body.style.backgroundColor = "#000000";
+	document.body.style.color = "#ffffff"; 
+  }
+});
+

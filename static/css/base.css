@@ -22,7 +22,7 @@
   --grid-gap-lg: 4rem;
 
   /* Colori */
-  --body-bg: yellow;
+  --body-bg: #ffffff;
   --header-gradient: linear-gradient(
     to bottom,
     #6a89e7 0%,
