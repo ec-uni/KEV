@@ -1,0 +1,76 @@
+  117  git diff
+  119  git
+  121  git diff
+  123  git add .
+  126  git diff
+  128  git add .
+  129  git commit -m "Added Keys to the keyboard, but modifiers for now are not covered by js script"
+  133  git branch
+  135  git push
+  137  git fetch
+  141  git log
+  146  git push
+  147  git pull
+  148  git push
+  149  git push --help
+  150  git pull origin main
+  151  git pull --no-rebase origin main
+  152  git push origin main
+  154  git pull --rebase origin main
+  155  git diff
+  157  git log
+  158  git branch -r
+  159  git checkout main
+  160  git pull --rebase origin main
+  161  [200~git status
+  163  [200~git status
+  165  git status
+  169  git checkout main
+  191  git clone https://github.com/ec-uni/KEV
+  206  git status
+  260  git push origin main
+  272  git status
+  273  git diff
+  275  git add .
+  278  git commit -m "Added Keys to Keyboard, modifiers are not covered yet by js script"
+  279  git push
+  301  git restore .
+  309  git status
+  311  git branch
+  312  git checkout ThemeSwitching
+  313  git branch ThemeSwitching
+  314  git checkout ThemeSwitching
+  316  git push
+  317  git push --set-upstream origin ThemeSwitching
+  320  git status
+  375  git status
+  378  git diff
+  380  git add .
+  381  git commit -m "Added a menu bar for theme selection, with actual js just works for the background of body"
+  382  git push
+  386  git status
+  415  git status
+  420  git status
+  421  git merge main
+  423  git merge
+  425  git branch
+  427  git status
+  428  git branches
+  429  git branch
+  430  git checkout main
+  431  git merge ThemeSwitching
+  433  git push
+  437  git branch
+  439  git branch -d ThemeSwitching
+  442  git push
+  444  git push origin --delete ThemeSwitching
+  448  git branch
+  458  git status
+  531  git diff
+  532  git diff
+  536  git branch
+  538  git add .
+  539  git commit -m "Fixed Most of Modifiers in js, added menu bar for selection of keyboard layouts ( not functional )."
+  540  git push
+  543  history | grep git
+  544  history | grep git > test.txt

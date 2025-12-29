@@ -31,6 +31,7 @@
 	background-color: #373b41;
 	align-items:center;
 	justify-content:center;
+	height: clamp(1rem,40vh,5rem);
 }
 .keyboard-key > p
 {
@@ -41,5 +42,33 @@
 .space
 {
 	flex: 6; 
-	height: fit-content;
 }
+.escape
+{
+	flex:1.2;
+}
+.tab
+{
+	flex:1.4;
+}
+.enter
+{
+	flex:1.5;
+}
+.control
+{
+	flex:1.1;
+}
+.backspace
+{
+	flex:1.8;
+}
+.capslock
+{
+	flex:1.6;
+}
+.shift
+{
+	flex:2;
+}
+
