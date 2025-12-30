@@ -1,21 +1,80 @@
 // Keyboard Highlighting + Detection
 document.addEventListener("keydown", function(event) {
-    const key = event.key;//.toLowerCase(); // il tasto premuto
-    const tasti = document.querySelectorAll(".keyboard-key p"); // tutti i <p>
-	console.log(key);
-    tasti.forEach(tasto => {
-        if (tasto.textContent/*.toLowerCase()*/ === key	) {
-            const parent = tasto.parentElement;
-	    console.log(key);
-            parent.style.backgroundColor = "#b294bb";
-            
-            // torna al colore originale dopo 200ms
-            setTimeout(() => {
-                parent.style.backgroundColor = "#373b41";
-            }, 200);
+	keycheck(event.key);
+	const dati = document.querySelectorAll(".keyboard-key p");
+        dati.forEach(tasto => {
+        if (tasto.textContent === event.key) {
+           changekeycolor(tasto.parentElement); 
+  	   if(event.key === "Shift" || event.key === "CapsLock")
+	   {
+		   casepress(dati);
+	   }
+  	  
         }
     });
 });
+
+document.addEventListener("keyup", function(event) {
+	const dati = document.querySelectorAll(".keyboard-key p");
+	if(event.key == "Shift")
+	{
+		casepress(dati);
+	}
+});
+
+
+
+function keycheck(key)
+{
+	console.log("Key Printed: " + key);
+
+}
+
+function upcase(arr)
+{
+	arr.forEach(tasto => {
+		if(tasto.textContent.length == 1){
+			tasto.textContent = tasto.textContent.toUpperCase();
+		}
+
+	});
+}
+function downcase(arr) { arr.forEach(tasto => {
+		if(tasto.textContent.length == 1){
+			tasto.textContent = tasto.textContent.toLowerCase();
+		}
+
+	});
+}
+function casepress(arr)
+{
+	size = arr.length;
+	for( let i = 0; i< size; i++)
+	{
+		if(arr[i].textContent === "A"){
+			downcase(arr);
+			break;
+		}
+		if(arr[i].textContent === "a"){
+			upcase(arr);
+			break;
+		}
+	}
+
+}
+
+function changekeycolor(yourparent)
+{
+            yourparent.style.backgroundColor = "#b294bb";
+            // torna al colore originale dopo 50ms
+            setTimeout(() => {
+                yourparent.style.backgroundColor = "#373b41";
+            }, 50);
+}
+
+
+
+
 
 
 // Theme Selection
