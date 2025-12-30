@@ -1,6 +1,5 @@
 // Keyboard Highlighting + Detection
 document.addEventListener("keydown", function(event) {
-	keycheck(event.key);
 	const dati = document.querySelectorAll(".keyboard-key p");
         dati.forEach(tasto => {
         if (tasto.textContent === event.key) {
@@ -94,4 +93,39 @@ theme_selection.addEventListener("change", () => {
 const layout_selector = document.querySelector("#Keyboard-Layout"); 
 layout_selector.addEventListener("change", () => {
 	console.log("Function Keyboard Layout");
+  	setlayout(layout_selector.value);	
+
+		
 });
+
+const layouts = {
+	QWERTY: [
+		"q","w","e","r","t","y","u","i","o","p",
+		"a","s","d","f","g","h","j","k","l","-",
+		"z","x","c","v","b","n","m","è","+","ù",
+		"à",",",".","-"
+	],
+
+	Colemak: [
+		"q","w","f","p","g","j","l","u","y",";",
+		"a","r","s","t","d","h","n","e","i","o",
+		"z","x","c","v","b","k","m","[","]","/",
+		"'",",",".","/"
+	],
+
+	QWERTZ: [
+		"q","w","e","r","t","z","u","i","o","p",
+		"a","s","d","f","g","h","j","k","l","-",
+		"y","x","c","v","b","n","m","ü","+","#",
+		"ä",",",".","-"
+	]
+};
+
+function setlayout(layer)
+{
+	for (let i=0; i<34; i++)
+	{
+		document.querySelector(`#Key${i+1}`).textContent = layouts[layer][i];	
+	}
+}
+
