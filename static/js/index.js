@@ -1,3 +1,4 @@
+/*
 // Keyboard Highlighting + Detection
 document.addEventListener("keydown", function(event) {
 	const dati = document.querySelectorAll(".keyboard-key p");
@@ -20,7 +21,29 @@ document.addEventListener("keyup", function(event) {
 		casepress(dati);
 	}
 });
+*/
 
+document.addEventListener("keydown", function(event) {
+    const dati = document.querySelectorAll(".keyboard-key p");
+	keycheck(event.code);
+    dati.forEach(tasto => {
+        if (tasto.dataset.code === event.code) {
+            changekeycolor(tasto.parentElement);
+
+            // gestisci maiuscole
+            if(event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
+                casepress(dati);
+            }
+        }
+    });
+});
+
+document.addEventListener("keyup", function(event) {
+    const dati = document.querySelectorAll(".keyboard-key p");
+    if(event.code === "ShiftLeft" || event.code === "ShiftRight") {
+        casepress(dati);
+    }
+});
 
 
 function keycheck(key)
@@ -97,35 +120,45 @@ layout_selector.addEventListener("change", () => {
 
 		
 });
-
+//Map comparison of event.key ( positional way, for each id in a incremental way  )
 const layouts = {
-	QWERTY: [
-		"q","w","e","r","t","y","u","i","o","p",
-		"a","s","d","f","g","h","j","k","l","-",
-		"z","x","c","v","b","n","m","è","+","ù",
-		"à",",",".","-"
-	],
+    QWERTY: [
+        // Riga 0
+        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
+        // Riga 1
+        "Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\",
+        // Riga 2
+        "CapsLock","a","s","d","f","g","h","j","k","l","ò","'","Enter",
+        // Riga 3
+        "Shift","z","x","c","v","b","n","m",",",".","_",
+        // Riga 4
+        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
+    ],
 
-	Colemak: [
-		"q","w","f","p","g","j","l","u","y",";",
-		"a","r","s","t","d","h","n","e","i","o",
-		"z","x","c","v","b","k","m","[","]","/",
-		"'",",",".","/"
-	],
+    Colemak: [
+        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
+        "Tab","q","w","f","p","g","j","l","u","y",";","[","]","\\",
+        "CapsLock","a","r","s","t","d","h","n","e","i","o","'","Enter",
+        "Shift","z","x","c","v","b","k","m",",",".","/",
+        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
+    ],
 
-	QWERTZ: [
-		"q","w","e","r","t","z","u","i","o","p",
-		"a","s","d","f","g","h","j","k","l","-",
-		"y","x","c","v","b","n","m","ü","+","#",
-		"ä",",",".","-"
-	]
+    QWERTZ: [
+        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
+        "Tab","q","w","e","r","t","z","u","i","o","p","[","]","\\",
+        "CapsLock","a","s","d","f","g","h","j","k","l","-","'","Enter",
+        "Shift","y","x","c","v","b","n","m","ü","+","#",
+        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
+    ]
 };
 
 function setlayout(layer)
 {
-	for (let i=0; i<34; i++)
+	for (let i=0; i<59; i++)
 	{
 		document.querySelector(`#Key${i+1}`).textContent = layouts[layer][i];	
 	}
 }
+
+
 
