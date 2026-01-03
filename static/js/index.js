@@ -1,3 +1,4 @@
+
 /*
 // Keyboard Highlighting + Detection
 document.addEventListener("keydown", function(event) {
@@ -63,6 +64,18 @@ document.addEventListener("keyup", function(event) {
         casepress(dati);
     }
 });
+
+
+document.getElementById("wipetext").addEventListener("click", wipepress);
+
+function wipepress(){		
+	const battlefield = document.querySelector("#battlefield");
+	battlefield.value = "";
+
+
+}
+
+
 
 document.getElementById("benchmark").addEventListener("click", ButtonPressed);
 
@@ -162,7 +175,7 @@ theme_selection.addEventListener("change", () => {
 	  document.body.style.backgroundColor = "#ffffff";
 	  document.body.style.color = "#000000";
   }
-  else {document.body.style.backgroundColor = "#000000";
+  else {document.body.style.backgroundColor = "#505050";
 	document.body.style.color = "#ffffff"; 
   }
 });
