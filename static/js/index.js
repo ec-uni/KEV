@@ -24,15 +24,23 @@ document.addEventListener("keyup", function(event) {
 */
 
 document.addEventListener("keydown", function(event) {
- //   let textfield = document.querySelector("#battlefield").value;
+    const battlefield = document.querySelector("#battlefield");
     const dati = document.querySelectorAll(".keyboard-key p");
 	keycheck(event.code);
     dati.forEach(tasto => {
         if (tasto.dataset.code === event.code) {
        
-		console.log(getKey(event.code));
-//		textfield = textfield + getKey(event.code);
-//		console.log(textfield);
+		key = getKey(event.code);
+		console.log(key);
+		if(key.length === 1 || key === " ")
+		{
+			battlefield.value += key;
+		}
+		if(key === "Backspace")
+		{
+			battlefield.value = battlefield.value.slice(0,-1);
+		}
+
         	let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
 	    tasto.parentElement.dataset.pressCount = count + 1;
 
