@@ -11,6 +11,7 @@
 
 {% block content %}
 
+<form autocomplete="off">
 <select id="Theme" name="Theme">
   <option>Dark</option>
   <option selected>Light</option>
@@ -20,14 +21,16 @@
 	<option value="QWERTY">QWERTY</option>
 	<option value="Colemak">Colemak</option>
 	<option value="QWERTZ">QWERTZ</option>
-</select>
 
+</select>
 <input id="inputfile" type="file" accept=".txt">
 <button id="benchmark">Run</button>
 
 <br>
-<input type="text" id="battlefield">
+<textarea id="battlefield" wrap="soft"></textarea>
 <button id="wipetext">Clear</button>
+
+</form>
 
 <h1>HTML + CSS Keyboard</h1>
 <div class="keyboard cont-col">
