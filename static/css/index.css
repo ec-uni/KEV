@@ -5,7 +5,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width:60%;
+	width:80vw;
 	background-color:grey;
 	/*padding: 10px;*/
 }
@@ -15,7 +15,6 @@
 	width: 100%;
 	height: fit-content;
 	/*margin: clamp(var(--space-xs), 1vw, var(--space-md)) auto 0 auto;*/
-	padding: var(--padding-y) var(--padding-x);
 	box-sizing: border-box;	
 	display: flex;
 	flex-direction: row;

@@ -24,12 +24,23 @@ document.addEventListener("keyup", function(event) {
 */
 
 document.addEventListener("keydown", function(event) {
+ //   let textfield = document.querySelector("#battlefield").value;
     const dati = document.querySelectorAll(".keyboard-key p");
 	keycheck(event.code);
     dati.forEach(tasto => {
         if (tasto.dataset.code === event.code) {
-            changekeycolor(tasto.parentElement);
+       
+		console.log(getKey(event.code));
+//		textfield = textfield + getKey(event.code);
+//		console.log(textfield);
+        	let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
+	    tasto.parentElement.dataset.pressCount = count + 1;
 
+		let intensity= Math.min((count + 1) * 3,255);
+		tasto.parentElement.style.backgroundColor = `rgb(${intensity},50,150)`;
+		
+
+	    changekeycolor(tasto.parentElement);
             // gestisci maiuscole
             if(event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
                 casepress(dati);
@@ -44,6 +55,41 @@ document.addEventListener("keyup", function(event) {
         casepress(dati);
     }
 });
+
+document.getElementById("benchmark").addEventListener("click", ButtonPressed);
+
+function ButtonPressed() {
+    const filedom = document.getElementById("inputfile");
+    const file = filedom.files[0];
+    
+    if (!file) {
+        alert("If you don't give a file it won't go further.");
+        return;
+    }
+    
+    console.log("Elaboro...");
+    
+    const reader = new FileReader();
+
+    // This runs when the file is successfully read
+    reader.onload = function(e) {
+        const text = e.target.result;
+        console.log("File content:");
+	for( let i=0; i<text.length; i++)
+	    {
+		    console.log("lettera: ",text[i]);
+		    // Here is where w simulate the writing phase, in order to obtain our heatmap
+
+	    }
+    };
+
+    // This runs if there is an error reading the file
+    reader.onerror = function() {
+        alert("Error reading file!");
+    };
+
+    reader.readAsText(file); // Start reading the file
+}
 
 
 function keycheck(key)
@@ -87,10 +133,11 @@ function casepress(arr)
 
 function changekeycolor(yourparent)
 {
-            yourparent.style.backgroundColor = "#b294bb";
+	    let color = yourparent.style.backgroundColor;
+            yourparent.style.backgroundColor = "#8c9440";
             // torna al colore originale dopo 50ms
             setTimeout(() => {
-                yourparent.style.backgroundColor = "#373b41";
+                yourparent.style.backgroundColor = color;
             }, 50);
 }
 
@@ -152,6 +199,21 @@ const layouts = {
     ]
 };
 
+
+const codes = [
+    "Escape",
+    "Digit1","Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0",
+    "Minus","Equal","Backspace",
+    "Tab",
+    "KeyQ","KeyW","KeyE","KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP",
+    "BracketLeft","BracketRight","Backslash",
+    "CapsLock",
+    "KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter",
+    "ShiftLeft",
+    "KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM","Comma","Period","Slash",
+    "ControlLeft","MetaLeft","AltLeft","Space","AltRight","Fn","ControlRight"
+];
+
 function setlayout(layer)
 {
 	for (let i=0; i<59; i++)
@@ -160,5 +222,19 @@ function setlayout(layer)
 	}
 }
 
+function getKey(code)
+{
+	let res;
+	const layer = document.querySelector("#Keyboard-Layout").value; 
+	for(let i=0;i<codes.length;i++)
+	{
+		if(codes[i] == code)
+			res = i;		
+	}
+
+
+	return layouts[layer][res];
+
+}
 
 
