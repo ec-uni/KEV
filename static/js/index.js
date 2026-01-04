@@ -24,39 +24,51 @@ document.addEventListener("keyup", function(event) {
 });
 */
 
+
+let maxPresses = 0; 
+
 document.addEventListener("keydown", function(event) {
     const battlefield = document.querySelector("#battlefield");
     const dati = document.querySelectorAll(".keyboard-key p");
-	keycheck(event.code);
+
+    keycheck(event.code);
+
     dati.forEach(tasto => {
         if (tasto.dataset.code === event.code) {
-       
-		key = getKey(event.code);
-		console.log(key);
-		if(key.length === 1 || key === " ")
-		{
-			battlefield.value += key;
-		}
-		if(key === "Backspace")
-		{
-			battlefield.value = battlefield.value.slice(0,-1);
-		}
+            let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
+            tasto.parentElement.dataset.pressCount = count + 1;
 
-        	let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
-	    tasto.parentElement.dataset.pressCount = count + 1;
+            if (maxPresses < count + 1) {
+                maxPresses = count + 1;
+            }
 
-		let intensity= Math.min((count + 1) * 3,255);
-		tasto.parentElement.style.backgroundColor = `rgb(${intensity},50,150)`;
-		
-
-	    changekeycolor(tasto.parentElement);
-            // gestisci maiuscole
-            if(event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
-                casepress(dati);
+            let key = getKey(event.code);
+            if (key.length === 1 || key === " ") {
+                battlefield.value += key;
+            }
+            if (key === "Backspace") {
+                battlefield.value = battlefield.value.slice(0, -1);
             }
         }
     });
+
+    dati.forEach(tasto => {
+        let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
+        
+        let intensity = Math.min((count / maxPresses) * 255, 255);
+        
+        tasto.parentElement.style.backgroundColor = `rgb(${intensity}, 50, 150)`;
+    });
+
+    if (event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
+        casepress(dati);
+    }
+
+    battlefield.scrollTop = battlefield.scrollHeight;
 });
+
+
+
 
 document.addEventListener("keyup", function(event) {
     const dati = document.querySelectorAll(".keyboard-key p");
