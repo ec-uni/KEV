@@ -52,14 +52,7 @@ document.addEventListener("keydown", function(event) {
         }
     });
 
-    dati.forEach(tasto => {
-        let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
-        
-        let intensity = Math.min((count / maxPresses) * 255, 255);
-        
-        tasto.parentElement.style.backgroundColor = `rgb(${intensity}, 50, 150)`;
-    });
-
+    UpdateKeyColors(dati); 
     if (event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
         casepress(dati);
     }
@@ -67,7 +60,37 @@ document.addEventListener("keydown", function(event) {
     battlefield.scrollTop = battlefield.scrollHeight;
 });
 
+function UpdateKeyColors(dati)
+{
+	dati.forEach(tasto => {
+        let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
+        
+        let intensity = Math.min((count / maxPresses) * 255, 255);
+        
+        tasto.parentElement.style.backgroundColor = `rgb(${intensity}, 50, 150)`;
+    });
 
+   
+}
+	
+function ResetKeyColors(dati)
+{
+	dati.forEach(tasto => {
+        	tasto.parentElement.style.backgroundColor = `rgb(1, 50, 150)`;
+   	 });
+
+}
+
+function resetCountKeysVariables()
+{
+
+    const dati = document.querySelectorAll(".keyboard-key p");
+    dati.forEach(tasto => {
+            tasto.parentElement.dataset.pressCount = 0;
+   });
+   maxpresses = 0;
+
+}
 
 
 document.addEventListener("keyup", function(event) {
@@ -81,6 +104,7 @@ document.addEventListener("keyup", function(event) {
 document.getElementById("wipetext").addEventListener("click", wipepress);
 
 function wipepress(){		
+
 	const battlefield = document.querySelector("#battlefield");
 	battlefield.value = "";
 
@@ -122,7 +146,14 @@ function ButtonPressed() {
     };
 
     reader.readAsText(file); // Start reading the file
+    resetCountKeysVariables();
+    ResetKeyColors();
+           
 }
+
+
+
+
 
 
 function keycheck(key)
@@ -265,9 +296,23 @@ function getKey(code)
 			res = i;		
 	}
 
-
 	return layouts[layer][res];
 
 }
 
+function getKeyCode(label)
+{
+	let res;
+	const layout = layouts[layout_selector.value];
+	for(let i=0; i<layout.length;i++)
+	{
+            if (layout[i] === label) 
+             	 {
+    	       		 res = codes[i]; 
+       		     break;  
+  		 }	
+	}
+
+	return res;
+}
 
