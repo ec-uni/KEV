@@ -69,8 +69,8 @@ function UpdateViewKeys(e) {
    if(e.type === "layoutChange")
 		ext.setlayout(e.value);
    
-   if(e.type === "themeselection")
-	ext.themechange(e.value);	
+   /*if(e.type === "themeselection")
+	ext.themechange(e.value);*/	
 
 }
 

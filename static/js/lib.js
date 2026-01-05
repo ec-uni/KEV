@@ -153,7 +153,26 @@ export function changekeycolor(code) {
     }, 50);
 }
 
-export function themechange(value)
+
+const themeCheckbox = document.getElementById("Theme");
+
+themeCheckbox.addEventListener("change", () => {
+  if (themeCheckbox.checked) { // checkbox ON
+
+	document.body.style.backgroundColor = "#C5C8C6";
+	document.body.style.color = "#ffffff";
+
+	console.log("Darkmode");
+  } else { // checkbox OFF
+
+	document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#C5C8C6";
+
+	console.log("Lightmode");
+  }
+});
+
+/*export function themechange(value)
 {
   if (value === "Light") {
 	  document.body.style.backgroundColor = "#ffffff";
@@ -164,7 +183,7 @@ export function themechange(value)
   }
 
 
-}
+}*/
 
 export function UpdateKeyColors(maxPresses)
 {
