@@ -85,6 +85,8 @@ function KeyOverride(e) {
     
     if (e.code === "Backspace") {
         battlefield.value = battlefield.value.slice(0, -1);
+    } else if(e.code === "Space"){
+	battlefield.value += " ";	
     } else if (e.code === "Enter") {
         battlefield.value += "\n";
     } else if (e.code === "Tab") {
@@ -96,7 +98,12 @@ function KeyOverride(e) {
 			res = upper ? res.toUpperCase() : res.toLowerCase();
         		battlefield.value += res; 
 	    }
+	    else
+	    {
+		    battlefield.value += res;
+	    }
     }
+    battlefield.scrollTop = battlefield.scrollHeight;
 }
 
 
