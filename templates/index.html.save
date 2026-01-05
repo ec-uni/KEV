@@ -11,14 +11,8 @@
 
 {% block content %}
 
-<div class="uppertext">
-
-<span>Dark Mode</span>
-<label class="switch">
-<input type="checkbox" id="Theme" name="Theme">
-<span class="slider"></span>
-</label>
-
+Dark Mode
+<input type="checkbox" id="theme" name="theme" value="light">
 <!--<form autocomplete="off">
 <select id="Theme" name="Theme">
   <option>Dark</option>
@@ -34,11 +28,9 @@
 <input id="inputfile" type="file" accept=".txt">
 <button id="benchmark">Run</button>
 
-</div>
-
 <br>
 <textarea id="battlefield" wrap="soft"></textarea>
-<button id="btn-clear">Clear</button>
+<button id="wipetext">Clear</button>
 
 </form>
 
