@@ -132,3 +132,14 @@ function HeatMap(e) {
     ext.UpdateKeyColors(maxPresses);
 }
 
+function clearButton(){
+    const textBox = document.getElementById('battlefield');
+    const clearbutton = document.getElementById('btn-clear');
+    
+    clearbutton.addEventListener('click', () => {
+    	textBox.value = '';
+	textBox.focus();
+    })
+}
+
+document.addEventListener('DOMContentLoaded', clearButton);
