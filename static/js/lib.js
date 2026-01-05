@@ -1,3 +1,5 @@
+const dati = document.querySelectorAll(".keyboard-key p");
+export let maxPresses = 0;
 export const ignoredCodes = [
         "ShiftLeft", "ShiftRight",
         "ControlLeft", "ControlRight",
@@ -163,3 +165,35 @@ export function themechange(value)
 
 
 }
+
+export function UpdateKeyColors(maxPresses)
+{
+	dati.forEach(tasto => {
+        let count = parseInt(tasto.parentElement.dataset.pressCount) || 0;
+        
+        let intensity = Math.min((count / maxPresses) * 255, 255);
+        
+        tasto.parentElement.style.backgroundColor = `rgb(${intensity}, 50, 150)`;
+    });
+
+}
+	
+export function ResetKeyColors()
+{
+	dati.forEach(tasto => {
+        	tasto.parentElement.style.backgroundColor = `rgb(1, 50, 150)`;
+   	 });
+
+}
+
+export function resetCountKeysVariables(maxPresses)
+{
+
+    dati.forEach(tasto => {
+            tasto.parentElement.dataset.pressCount = 0;
+   });
+   maxPresses = 0;
+
+}
+
+

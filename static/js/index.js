@@ -1,5 +1,7 @@
 import * as ext from "./lib.js";
 
+
+let maxPresses = 0;
 const dati = document.querySelectorAll(".keyboard-key p");
 
 document.addEventListener("keydown",HandleKey);
@@ -16,6 +18,7 @@ function HandleKey(e)
 	if(e.type === "keydown")
 	{
 		KeyOverride(e);
+		HeatMap(e);
 	}
 }
 
@@ -106,4 +109,26 @@ function KeyOverride(e) {
     battlefield.scrollTop = battlefield.scrollHeight;
 }
 
+function HeatMap(e) {
+    const key = document.querySelector(
+        `.keyboard-key p[data-code="${e.code}"]`
+    );
+    if (!key) return;
+
+    const parent = key.parentElement;
+
+    // contatore
+    let count = parseInt(parent.dataset.pressCount) || 0;
+    count++;
+    parent.dataset.pressCount = count;
+
+    // aggiorna massimo globale
+    if (count > maxPresses) {
+        maxPresses = count;
+    }  
+    console.log("sium:" + maxPresses);
+    console.log(count);
+    
+    ext.UpdateKeyColors(maxPresses);
+}
 
