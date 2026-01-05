@@ -1,164 +1,102 @@
-/*
-// Keyboard Highlighting + Detection
-document.addEventListener("keydown", function(event) {
-	const dati = document.querySelectorAll(".keyboard-key p");
-        dati.forEach(tasto => {
-        if (tasto.textContent === event.key) {
-           changekeycolor(tasto.parentElement); 
-  	   if(event.key === "Shift" || event.key === "CapsLock")
-	   {
-		   casepress(dati);
-	   }
-  	  
-        }
-    });
-});
+import * as ext from "./lib.js";
 
-document.addEventListener("keyup", function(event) {
-	const dati = document.querySelectorAll(".keyboard-key p");
-	if(event.key == "Shift")
+const dati = document.querySelectorAll(".keyboard-key p");
+
+document.addEventListener("keydown",HandleKey);
+document.addEventListener("keyup",HandleKey);
+document.getElementById("Keyboard-Layout").addEventListener("change", e => UpdateViewKeys({ type: "layoutChange", value: e.target.value }));
+document.getElementById("Theme").addEventListener("change", e => UpdateViewKeys({type:"themeselection",value: e.target.value}));
+
+let shiftPressed = false, capsLockActive = false;
+
+function HandleKey(e)
+{
+	UpdateViewKeys(e);
+	HandleCapModifiers(e);
+	if(e.type === "keydown")
 	{
-		casepress(dati);
+		KeyOverride(e);
 	}
-});
-*/
+}
 
-document.addEventListener("keydown", function(event) {
-    const dati = document.querySelectorAll(".keyboard-key p");
-	keycheck(event.code);
-    dati.forEach(tasto => {
-        if (tasto.dataset.code === event.code) {
-            changekeycolor(tasto.parentElement);
+function HandleCapModifiers(e)
+{
+	if(e.type === "keydown")
+	{
+		if(e.code === "ShiftLeft" || e.code === "ShiftRight")
+		{	shiftPressed = true;}
+	
+		if(e.code === "CapsLock")
+		{
+			capsLockActive = !capsLockActive;
+		}
+	}
+	else if(e.type === "keyup")
+	{
+		if(e.code === "ShiftLeft" || e.code === "ShiftRight")
+			{shiftPressed = false;}
+	}
+}
 
-            // gestisci maiuscole
-            if(event.code === "ShiftLeft" || event.code === "ShiftRight" || event.code === "CapsLock") {
-                casepress(dati);
-            }
-        }
-    });
-});
+function UpdateViewKeys(e) {
+    if(e.type === "keydown")
+	{
+	if(!e.repeat)
+		{
+		if (    e.code === "ShiftLeft" ||
+        		e.code === "ShiftRight" ||
+        		e.code === "CapsLock")
+			{
+   	        	ext.casepress(dati);
+			}
+	
+    		ext.changekeycolor(e.code);
+		}
+	}
 
-document.addEventListener("keyup", function(event) {
-    const dati = document.querySelectorAll(".keyboard-key p");
-    if(event.code === "ShiftLeft" || event.code === "ShiftRight") {
-        casepress(dati);
+    else if (e.type === "keyup")
+	{
+	if(!e.repeat && (e.code === "ShiftLeft" || e.code === "ShiftRight")) 
+		{
+			ext.casepress(dati);
+		}
+
+	}
+
+   if(e.type === "layoutChange")
+		ext.setlayout(e.value);
+   
+  /* if(e.type === "themeselection")
+	ext.themechange(e.value);*/	
+
+}
+
+// This is where key event gets override and the text area or whatever receives output as if you're using another layout.
+// Keep in mind that the override works just in the website itself... so we limit the typing to one single textarea
+
+function KeyOverride(e) {
+    const battlefield = document.querySelector("#battlefield");
+    if (document.activeElement !== battlefield) return;
+
+    e.preventDefault(); 
+
+    console.log("You're writing in the text area.");
+    console.log(e.code);
+    
+    if (e.code === "Backspace") {
+        battlefield.value = battlefield.value.slice(0, -1);
+    } else if (e.code === "Enter") {
+        battlefield.value += "\n";
+    } else if (e.code === "Tab") {
+        battlefield.value += "\t";
+    } else if (!ext.ignoredCodes.includes(e.code) && ext.getKey(e.code) !== undefined) {
+	let res = ext.getKey(e.code);	
+	    if(res.length === 1 && res.match(/[a-z]/i)){
+			const upper = shiftPressed !== capsLockActive; 
+			res = upper ? res.toUpperCase() : res.toLowerCase();
+        		battlefield.value += res; 
+	    }
     }
-});
-
-
-function keycheck(key)
-{
-	console.log("Key Printed: " + key);
-
 }
-
-function upcase(arr)
-{
-	arr.forEach(tasto => {
-		if(tasto.textContent.length == 1){
-			tasto.textContent = tasto.textContent.toUpperCase();
-		}
-
-	});
-}
-function downcase(arr) { arr.forEach(tasto => {
-		if(tasto.textContent.length == 1){
-			tasto.textContent = tasto.textContent.toLowerCase();
-		}
-
-	});
-}
-function casepress(arr)
-{
-	size = arr.length;
-	for( let i = 0; i< size; i++)
-	{
-		if(arr[i].textContent === "A"){
-			downcase(arr);
-			break;
-		}
-		if(arr[i].textContent === "a"){
-			upcase(arr);
-			break;
-		}
-	}
-
-}
-
-function changekeycolor(yourparent)
-{
-            yourparent.style.backgroundColor = "#b294bb";
-            // torna al colore originale dopo 50ms
-            setTimeout(() => {
-                yourparent.style.backgroundColor = "#373b41";
-            }, 50);
-}
-
-
-
-
-
-
-// Theme Selection
-const theme_selection = document.querySelector("#Theme");
-theme_selection.addEventListener("change", () => {
-  console.log("Hai switchato tema: ",theme_selection.value);
-  if (theme_selection.value == "Light") {
-	  document.body.style.backgroundColor = "#ffffff";
-	  document.body.style.color = "#000000";
-  }
-  else {document.body.style.backgroundColor = "#000000";
-	document.body.style.color = "#ffffff"; 
-  }
-});
-
-// Keyboard Layout Selection
-const layout_selector = document.querySelector("#Keyboard-Layout"); 
-layout_selector.addEventListener("change", () => {
-	console.log("Function Keyboard Layout");
-  	setlayout(layout_selector.value);	
-
-		
-});
-//Map comparison of event.key ( positional way, for each id in a incremental way  )
-const layouts = {
-    QWERTY: [
-        // Riga 0
-        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
-        // Riga 1
-        "Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\",
-        // Riga 2
-        "CapsLock","a","s","d","f","g","h","j","k","l","ò","'","Enter",
-        // Riga 3
-        "Shift","z","x","c","v","b","n","m",",",".","_",
-        // Riga 4
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
-    ],
-
-    Colemak: [
-        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
-        "Tab","q","w","f","p","g","j","l","u","y",";","[","]","\\",
-        "CapsLock","a","r","s","t","d","h","n","e","i","o","'","Enter",
-        "Shift","z","x","c","v","b","k","m",",",".","/",
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
-    ],
-
-    QWERTZ: [
-        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
-        "Tab","q","w","e","r","t","z","u","i","o","p","[","]","\\",
-        "CapsLock","a","s","d","f","g","h","j","k","l","-","'","Enter",
-        "Shift","y","x","c","v","b","n","m","ü","+","#",
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
-    ]
-};
-
-function setlayout(layer)
-{
-	for (let i=0; i<59; i++)
-	{
-		document.querySelector(`#Key${i+1}`).textContent = layouts[layer][i];	
-	}
-}
-
 
 

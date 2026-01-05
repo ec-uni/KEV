@@ -1,11 +1,65 @@
 
+.switch
+{
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+
+}
+
+.switch input 
+{ 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
 .keyboard
 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width:60%;
+	width:80vw;
 	background-color:grey;
 	/*padding: 10px;*/
 }
@@ -15,7 +69,6 @@
 	width: 100%;
 	height: fit-content;
 	/*margin: clamp(var(--space-xs), 1vw, var(--space-md)) auto 0 auto;*/
-	padding: var(--padding-y) var(--padding-x);
 	box-sizing: border-box;	
 	display: flex;
 	flex-direction: row;
@@ -73,3 +126,23 @@
 	flex:2;
 }
 
+.uppertext
+{
+
+display: flex;
+justify-content: center;
+gap: 10px;
+align-items: center;
+
+}
+
+#battlefield
+{
+	font-size: clamp(.5em,3vh,6em);
+	overflow-y:auto;
+	resize:optional;
+	width:100%;
+	height:30vh;
+	#user-select:none;
+	#pointer-events:none;
+}
