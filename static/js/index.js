@@ -8,6 +8,7 @@ document.addEventListener("keydown",HandleKey);
 document.addEventListener("keyup",HandleKey);
 document.getElementById("Keyboard-Layout").addEventListener("change", e => UpdateViewKeys({ type: "layoutChange", value: e.target.value }));
 document.getElementById("Theme").addEventListener("change", e => UpdateViewKeys({type:"themeselection",value: e.target.value}));
+document.getElementById("benchmark").addEventListener("click",RunPress);
 
 let shiftPressed = false, capsLockActive = false;
 
@@ -18,7 +19,6 @@ function HandleKey(e)
 	if(e.type === "keydown")
 	{
 		KeyOverride(e);
-		HeatMap(e);
 	}
 }
 
@@ -107,6 +107,7 @@ function KeyOverride(e) {
 	    }
     }
     battlefield.scrollTop = battlefield.scrollHeight;
+		HeatMap(e);
 }
 
 function HeatMap(e) {
@@ -139,7 +140,68 @@ function clearButton(){
     clearbutton.addEventListener('click', () => {
     	textBox.value = '';
 	textBox.focus();
+	HeatMapReset();
     })
 }
 
 document.addEventListener('DOMContentLoaded', clearButton);
+
+function RunPress()
+{
+		const filedom = document.getElementById("inputfile");
+		const file = filedom.files[0];
+
+		if(!file)
+			{
+				alert("");
+				return;
+			}
+
+		const reader = new FileReader();
+
+		reader.onload = function(e)
+		{
+					const text = e.target.result;
+					console.log("File content: ");
+				        HeatMapFromFile(text);	
+		}
+		
+
+		reader.readAsText(file);
+}
+
+function HeatMapFromFile(text)
+{
+	HeatMapReset();
+	for (const letter of text)
+		{
+			let code = ext.getKeyCode(letter.toLowerCase());
+			const key = document.querySelector(
+       			 `.keyboard-key p[data-code="${code}"]`
+    				);
+	    		if (!key) continue;
+
+  		 	 const parent = key.parentElement;
+
+	    		// contatore
+			    let count = parseInt(parent.dataset.pressCount) || 0;
+			    count++;
+			    parent.dataset.pressCount = count;
+
+			    // aggiorna massimo globale
+			    if (count > maxPresses) {
+				maxPresses = count;
+			    }  
+			
+
+		}
+	console.log("ci sei quasi..");
+	ext.UpdateKeyColors(maxPresses);
+}
+
+function HeatMapReset()
+{
+	maxPresses = 0;
+	ext.ResetKeyColors();
+	ext.resetCountKeysVariables();
+}

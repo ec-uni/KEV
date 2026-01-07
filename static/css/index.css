@@ -61,8 +61,11 @@ input:checked + .slider:before {
 	align-items: center;
 	justify-content: center;
 	width:80vw;
-	background-color:grey;
-	/*padding: 10px;*/
+	background-color:#909bbb;
+	border-width: 6px;
+	border-style:solid;
+	padding: 7px;
+	border-radius: 10px;
 }
 .keyboard-row
 {
@@ -86,6 +89,9 @@ input:checked + .slider:before {
 	align-items:center;
 	justify-content:center;
 	height: clamp(1rem,40vh,5rem);
+	border-radius: 90px;
+	border-style:solid;
+	border-width:3px;
 }
 .keyboard-key > p
 {

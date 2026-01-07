@@ -1,5 +1,4 @@
 const dati = document.querySelectorAll(".keyboard-key p");
-export let maxPresses = 0;
 export const ignoredCodes = [
         "ShiftLeft", "ShiftRight",
         "ControlLeft", "ControlRight",
@@ -84,13 +83,13 @@ export function getKey(code)
 export function getKeyCode(label)
 {
 	let res;
-	layout_selector = document.querySelector("#Keyboard-Layout");
+        let layout_selector = document.querySelector("#Keyboard-Layout");
 	const layout = keyboard_layouts[layout_selector.value];
 	for(let i=0; i<layout.length;i++)
 	{
             if (layout[i] === label)
              	 {
-    	       		 res = codes[i];
+    	       		 res = KeyCodes[i];
        		     break;
   		 }
 	}
@@ -211,8 +210,5 @@ export function resetCountKeysVariables(maxPresses)
     dati.forEach(tasto => {
             tasto.parentElement.dataset.pressCount = 0;
    });
-   maxPresses = 0;
 
 }
-
-
