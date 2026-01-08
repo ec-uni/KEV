@@ -11,16 +11,11 @@ export const ignoredCodes = [
 
 export const keyboard_layouts = {
     QWERTY: [
-        // Riga 0
         "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
-        // Riga 1
         "Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\",
-        // Riga 2
         "CapsLock","a","s","d","f","g","h","j","k","l","ò","'","Enter",
-        // Riga 3
         "Shift","z","x","c","v","b","n","m",",",".","_",
-        // Riga 4
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
+	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
     ],
 
     Colemak: [
@@ -28,7 +23,7 @@ export const keyboard_layouts = {
         "Tab","q","w","f","p","g","j","l","u","y",";","[","]","\\",
         "CapsLock","a","r","s","t","d","h","n","e","i","o","'","Enter",
         "Shift","z","x","c","v","b","k","m",",",".","/",
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
+	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
     ],
 
     QWERTZ: [
@@ -36,8 +31,38 @@ export const keyboard_layouts = {
         "Tab","q","w","e","r","t","z","u","i","o","p","[","]","\\",
         "CapsLock","a","s","d","f","g","h","j","k","l","-","'","Enter",
         "Shift","y","x","c","v","b","n","m","ü","+","#",
-        "Control","Meta","Alt"," ","AltGraph","Fn","Control"
-    ]
+	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
+    ],
+    Workman: [
+        "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
+        "Tab","q","d","r","w","b","j","f","u","p",";","[","]","\\",
+        "CapsLock","a","s","h","t","g","y","n","e","o","i","'","Enter",
+        "Shift","z","x","m","c","v","k","l",",",".","/",
+	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
+             ],
+
+    Dvorak: [
+        "Escape","1","2","3","4","5","6","7","8","9","0","[","]","Backspace",
+        "Tab","' ",",",".","p","y","f","g","c","r","l","/","=","\\",
+        "CapsLock","a","o","e","u","i","d","h","t","n","s","-","Enter",
+        "Shift",";","q","j","k","x","b","m","w","v","z",
+	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
+            ],
+AZERTY: [
+	 "Escape","&","é","\"","'","(","-","è","_","ç","à",")","=","Backspace",
+         "Tab","a","z","e","r","t","y","u","i","o","p","^","$","Backslash",
+         "CapsLock","q","s","d","f","g","h","j","k","l","m","ù","Enter",
+	 "ShiftLeft","<","w","x","c","v","b","n",",",";","!","ShiftRight",
+	 "ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
+	],
+QZERTY: [
+	 "Escape","1","2","3","4","5","6","7","8","9","0","'","ì","Backspace",
+	 "Tab","q","z","e","r","t","y","u","i","o","p","è","+","\\",
+	 "CapsLock","a","s","d","f","g","h","j","k","l","ò","à","Enter",
+	 "ShiftLeft","<","w","x","c","v","b","n","m",",",".",
+	 "ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
+        ]
+	
 };
 
 
