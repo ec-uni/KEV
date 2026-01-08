@@ -19,6 +19,7 @@ function HandleKey(e)
 	if(e.type === "keydown")
 	{
 		KeyOverride(e);
+		Statistics();
 	}
 }
 
@@ -141,6 +142,7 @@ function clearButton(){
     	textBox.value = '';
 	textBox.focus();
 	HeatMapReset();
+	StatsReset();
     })
 }
 
@@ -173,6 +175,7 @@ function RunPress()
 function HeatMapFromFile(text)
 {
 	HeatMapReset();
+	StatsReset();
 	for (const letter of text)
 		{
 			let code = ext.getKeyCode(letter.toLowerCase());
@@ -197,6 +200,7 @@ function HeatMapFromFile(text)
 		}
 	console.log("ci sei quasi..");
 	ext.UpdateKeyColors(maxPresses);
+	Statistics();
 }
 
 function HeatMapReset()
@@ -204,4 +208,29 @@ function HeatMapReset()
 	maxPresses = 0;
 	ext.ResetKeyColors();
 	ext.resetCountKeysVariables();
+}
+
+function StatsReset()
+{
+	document.getElementById("countTotalChars").textContent = 0;
+	document.getElementById("HomeRowUsage").textContent = "Unknown"; 
+	document.getElementById("HandBalanceRight").textContent = "Unknown";
+	document.getElementById("HandBalanceLeft").textContent = "Unknown"; 
+	document.getElementById("travelDistance").textContent = "Unknown"; 
+
+}
+
+function Statistics()
+{
+	let totalkeypress = ext.RetrieveTotalKeyPresses();
+	const handusage = ext.RetrieveHandUsage();
+	let righthandusage = ((handusage.right / totalkeypress) * 100).toFixed(2);
+	let lefthandusage = ((handusage.left / totalkeypress) * 100).toFixed(2);
+	let travelDistance = ext.RetrieveTravelDistance();
+	document.getElementById("countTotalChars").textContent = totalkeypress;
+	document.getElementById("HomeRowUsage").textContent = (ext.RetrieveHomeRowPresses() / totalkeypress * 100).toFixed(2) +" %";
+	document.getElementById("HandBalanceRight").textContent = righthandusage +" %";
+	document.getElementById("HandBalanceLeft").textContent = lefthandusage + " %"; 
+	document.getElementById("travelDistance").textContent = (travelDistance/totalkeypress).toFixed(2);
+
 }

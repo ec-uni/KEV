@@ -174,3 +174,20 @@ align-items: center;
 	#user-select:none;
 	#pointer-events:none;
 }
+
+.bigstats
+{
+	margin-top: clamp(10px,10vh,50em);
+	background-color:#909bbb;
+	border-style:solid;
+	border-radius:10px;
+	border-width:6px;
+}
+.stats1, .stats2
+{
+	margin-bottom:20px;
+}
+.stats1 p,.stats2 p
+{
+	margin-right:clamp(20px,5vw,30em);
+}

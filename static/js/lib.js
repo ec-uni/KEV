@@ -1,4 +1,7 @@
 const dati = document.querySelectorAll(".keyboard-key p");
+const datihomerow = document.querySelectorAll('.keyboard-key p[data-row="home"]');
+const datirighthand = document.querySelectorAll('.keyboard-key p[data-hand="right"]');
+const datilefthand = document.querySelectorAll('.keyboard-key p[data-hand="left"]');
 export const ignoredCodes = [
         "ShiftLeft", "ShiftRight",
         "ControlLeft", "ControlRight",
@@ -80,6 +83,26 @@ export const KeyCodes = [
     "ControlLeft","MetaLeft","AltLeft","Space","AltRight","Fn","ControlRight"
 ];
 
+export const KeyScore = {
+	    Escape: 5,
+	    Digit1: 4, Digit2: 3.5, Digit3: 3, Digit4: 2.5, Digit5: 2.5, 
+	    Digit6: 2.5, Digit7: 2.5, Digit8: 3, Digit9: 3.5, Digit0: 4,
+	    Minus: 4, Equal: 4, Backspace: 5,
+	    Tab: 4,
+	    KeyQ: 1, KeyW: 1, KeyE: 1, KeyR: 1, KeyT: 1,
+	    KeyY: 1, KeyU: 1, KeyI: 1, KeyO: 1, KeyP: 1,
+	    BracketLeft: 2, BracketRight: 2, Backslash: 3,
+	    CapsLock: 5,
+	    KeyA: 1, KeyS: 1, KeyD: 1, KeyF: 1, KeyG: 1.5,
+	    KeyH: 1.5, KeyJ: 1, KeyK: 1, KeyL: 1, Semicolon: 2, Quote: 3, Enter: 3.5,
+	    ShiftLeft: 5, ShiftRight: 5,
+	    KeyZ: 1, KeyX: 1, KeyC: 1, KeyV: 1, KeyB: 2,
+	    KeyN: 2, KeyM: 2, Comma: 2, Period: 2, Slash: 2,
+	    ControlLeft: 5, MetaLeft: 4, AltLeft: 3, Space: 1, AltRight: 3, Fn: 3, ControlRight: 5
+};
+
+
+
 //This is just visually.
 export function setlayout(layer)
 {
@@ -122,6 +145,10 @@ export function getKeyCode(label)
 }
 
 
+function getKeyScore(code)
+{
+	return KeyScore[code] || 0;
+}
 
 function upcase(arr)
 {
@@ -236,4 +263,59 @@ export function resetCountKeysVariables(maxPresses)
             tasto.parentElement.dataset.pressCount = 0;
    });
 
+}
+export function RetrieveTotalKeyPresses()
+{
+    let sum = 0;
+    dati.forEach(tasto => {
+    	   let count = Number(tasto.parentElement.dataset.pressCount || 0);
+	   sum += count; 
+    });
+	console.log("sum: "+sum);
+	return sum;
+}
+export function RetrieveHomeRowPresses()
+{
+	let sum = 0;
+	datihomerow.forEach(tasto => {
+		let count = Number(tasto.parentElement.dataset.pressCount || 0);
+		sum += count;
+	});
+	console.log("sum home: "+sum);
+	return sum;
+}
+
+export function RetrieveHandUsage() {
+	    let sumRight = 0, sumLeft = 0;
+
+	    datirighthand.forEach(tasto => {
+		            let count = Number(tasto.parentElement.dataset.pressCount || 0);
+		            sumRight += count;
+		        });
+
+	    datilefthand.forEach(tasto => {
+		            let count = Number(tasto.parentElement.dataset.pressCount || 0);
+		            sumLeft += count;
+		        });
+
+	     const space = document.querySelector('[data-code="Space"]');
+	         if(space) {
+	                 let count = Number(space.parentElement.dataset.pressCount || 0);
+	                 sumLeft += count / 2;
+	                sumRight += count / 2;
+                    }
+
+             return { left: sumLeft, right: sumRight };
+                        }
+	
+
+
+export function RetrieveTravelDistance()
+{
+	let sum = 0;
+    	dati.forEach(tasto => {
+    	   	let count = Number(tasto.parentElement.dataset.pressCount || 0);
+	   	sum += count * getKeyScore(tasto.dataset.code); 
+    	});
+	return sum;
 }
