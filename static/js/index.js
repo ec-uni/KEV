@@ -67,8 +67,9 @@ function UpdateViewKeys(e) {
 
 	}
 
-   if(e.type === "layoutChange")
+   if(e.type === "layoutChange"){
 		ext.setlayout(e.value);
+   }
    
    /*if(e.type === "themeselection")
 	ext.themechange(e.value);*/	
@@ -165,7 +166,8 @@ function RunPress()
 		{
 					const text = e.target.result;
 					console.log("File content: ");
-				        HeatMapFromFile(text);	
+				        //HeatMapFromFile(text);	
+					HeatMapFromFileall(text);
 		}
 		
 
@@ -234,3 +236,17 @@ function Statistics()
 	document.getElementById("travelDistance").textContent = (travelDistance/totalkeypress).toFixed(2);
 
 }
+
+async function HeatMapFromFileall(text)
+{	
+	HeatMapFromFile(text);
+	await ext.sleep(2000);
+	clearButton();
+	HeatMapReset();
+	StatsReset();
+	ext.RotateKeyboardLayout();		
+	await ext.sleep(2000);
+	HeatMapFromFile(text);
+	
+}
+

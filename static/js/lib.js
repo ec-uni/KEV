@@ -53,7 +53,7 @@ export const keyboard_layouts = {
             ],
 AZERTY: [
 	 "Escape","&","é","\"","'","(","-","è","_","ç","à",")","=","Backspace",
-         "Tab","a","z","e","r","t","y","u","i","o","p","^","$","Backslash",
+         "Tab","a","z","e","r","t","y","u","i","o","p","^","$","\\",
          "CapsLock","q","s","d","f","g","h","j","k","l","m","ù","Enter",
 	 "ShiftLeft","<","w","x","c","v","b","n",",",";","!","ShiftRight",
 	 "ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
@@ -319,3 +319,19 @@ export function RetrieveTravelDistance()
     	});
 	return sum;
 }
+
+
+export function RotateKeyboardLayout(){
+		    const layoutSelect = document.getElementById("Keyboard-Layout");
+		    const options = Array.from(layoutSelect.options);
+		    const currentIndex = layoutSelect.selectedIndex;
+		    const nextIndex = (currentIndex + 1) % options.length;
+		    layoutSelect.selectedIndex = nextIndex;
+		    layoutSelect.dispatchEvent(new Event('change'));
+}
+
+
+export function sleep(ms) {
+		    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
