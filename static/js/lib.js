@@ -1,7 +1,25 @@
+export const layoutNames = ["QWERTY", "Colemak", "QWERTZ", "Workman", "Dvorak", "AZERTY", "QZERTY"];
+
+export const LayoutResults = {};
+
+layoutNames.forEach(name => {
+	    LayoutResults[name] = {
+		    	    totalKeyPress: 0,
+		            homeRowUsage: 0,
+		            rightHandUsage: 0,
+		            leftHandUsage: 0,
+		            travelDistance: 0
+		        };
+});
+window.lr = LayoutResults;
+console.log(LayoutResults);
+
 const dati = document.querySelectorAll(".keyboard-key p");
 const datihomerow = document.querySelectorAll('.keyboard-key p[data-row="home"]');
 const datirighthand = document.querySelectorAll('.keyboard-key p[data-hand="right"]');
 const datilefthand = document.querySelectorAll('.keyboard-key p[data-hand="left"]');
+
+
 export const ignoredCodes = [
         "ShiftLeft", "ShiftRight",
         "ControlLeft", "ControlRight",
@@ -13,7 +31,7 @@ export const ignoredCodes = [
 
 
 export const keyboard_layouts = {
-    QWERTY: [
+    [layoutNames[0]]: [
         "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
         "Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\",
         "CapsLock","a","s","d","f","g","h","j","k","l","ò","'","Enter",
@@ -21,7 +39,7 @@ export const keyboard_layouts = {
 	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
     ],
 
-    Colemak: [
+    [layoutNames[1]]: [
         "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
         "Tab","q","w","f","p","g","j","l","u","y",";","[","]","\\",
         "CapsLock","a","r","s","t","d","h","n","e","i","o","'","Enter",
@@ -29,14 +47,14 @@ export const keyboard_layouts = {
 	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
     ],
 
-    QWERTZ: [
+    [layoutNames[2]]: [
         "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
         "Tab","q","w","e","r","t","z","u","i","o","p","[","]","\\",
         "CapsLock","a","s","d","f","g","h","j","k","l","-","'","Enter",
         "Shift","y","x","c","v","b","n","m","ü","+","#",
 	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
     ],
-    Workman: [
+    [layoutNames[3]]: [
         "Escape","1","2","3","4","5","6","7","8","9","0","-","=","Backspace",
         "Tab","q","d","r","w","b","j","f","u","p",";","[","]","\\",
         "CapsLock","a","s","h","t","g","y","n","e","o","i","'","Enter",
@@ -44,21 +62,21 @@ export const keyboard_layouts = {
 	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
              ],
 
-    Dvorak: [
+    [layoutNames[4]]: [
         "Escape","1","2","3","4","5","6","7","8","9","0","[","]","Backspace",
         "Tab","' ",",",".","p","y","f","g","c","r","l","/","=","\\",
         "CapsLock","a","o","e","u","i","d","h","t","n","s","-","Enter",
         "Shift",";","q","j","k","x","b","m","w","v","z",
 	"ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
             ],
-AZERTY: [
+    [layoutNames[5]]: [
 	 "Escape","&","é","\"","'","(","-","è","_","ç","à",")","=","Backspace",
          "Tab","a","z","e","r","t","y","u","i","o","p","^","$","\\",
          "CapsLock","q","s","d","f","g","h","j","k","l","m","ù","Enter",
-	 "ShiftLeft","<","w","x","c","v","b","n",",",";","!","ShiftRight",
+	 "ShiftLeft","<","w","x","c","v","b","n",",",";","!",
 	 "ControlLeft","MetaLeft","AltLeft"," ","AltRight","Fn","ControlRight"
 	],
-QZERTY: [
+    [layoutNames[6]]: [
 	 "Escape","1","2","3","4","5","6","7","8","9","0","'","ì","Backspace",
 	 "Tab","q","z","e","r","t","y","u","i","o","p","è","+","\\",
 	 "CapsLock","a","s","d","f","g","h","j","k","l","ò","à","Enter",

@@ -224,54 +224,39 @@ function StatsReset()
 
 function Statistics()
 {
-	
 	let totalkeypress = ext.RetrieveTotalKeyPresses();
-	let homerowusage = (ext.RetrieveHomeRowPresses() / totalkeypress * 100).toFixed(2) ;
 	const handusage = ext.RetrieveHandUsage();
 	let righthandusage = ((handusage.right / totalkeypress) * 100).toFixed(2);
 	let lefthandusage = ((handusage.left / totalkeypress) * 100).toFixed(2);
 	let travelDistance = ext.RetrieveTravelDistance();
- 	let travelDistancemean = (travelDistance/totalkeypress).toFixed(2);	
 
-
-
-	const layout = document.querySelector("#Keyboard-Layout").value;	
+	const layout = document.querySelector("#Keyboard-layout").value;	
+	
 	ext.LayoutResults[layout].totalKeyPress = totalkeypress; 
-	ext.LayoutResults[layout].homeRowUsage = homerowusage; 
 	ext.LayoutResults[layout].rightHandUsage = righthandusage; 
 	ext.LayoutResults[layout].leftHandUsage = lefthandusage; 
-	ext.LayoutResults[layout].travelDistance = travelDistancemean; 
+	ext.LayoutResults[layout].travelDistance = totalkeypress; 
 	
 
 
-	document.getElementById("countTotalChars").textContent = totalkeypress ;
-	document.getElementById("HomeRowUsage").textContent = homerowusage +" %";
+	document.getElementById("countTotalChars").textContent = ext.LayoutResults[layout].totalKeyPress ;
+	document.getElementById("HomeRowUsage").textContent = (ext.RetrieveHomeRowPresses() / totalkeypress * 100).toFixed(2) +" %";
 	document.getElementById("HandBalanceRight").textContent = righthandusage +" %";
 	document.getElementById("HandBalanceLeft").textContent = lefthandusage + " %"; 
-	document.getElementById("travelDistance").textContent = travelDistancemean;
-
-
-
-
-	console.log(ext.LayoutResults[layout].totalKeyPress); 
-	console.log(ext.LayoutResults[layout].homeRowUsage); 
-	console.log(ext.LayoutResults[layout].rightHandUsage);
-	console.log(ext.LayoutResults[layout].leftHandUsage); 
-	console.log(ext.LayoutResults[layout].travelDistance);	
+	document.getElementById("travelDistance").textContent = (travelDistance/totalkeypress).toFixed(2);
 
 }
 
 async function HeatMapFromFileall(text)
 {	
-	for(let i = 0; i<ext.layoutNames.length; i++)
-	{
-		await ext.sleep(2000);
-		ext.RotateKeyboardLayout();
-		HeatMapReset();
-		StatsReset();	
-		ext.resetCountKeysVariables(maxPresses);
-		HeatMapFromFile(text);
-	}
-
+	HeatMapFromFile(text);
+        await ext.sleep(2000);
+	HeatMapReset();
+	StatsReset();
+	clearButton();
+	ext.RotateKeyboardLayout();		
+	await ext.sleep(2000);
+	HeatMapFromFile(text);
+	
 }
 
