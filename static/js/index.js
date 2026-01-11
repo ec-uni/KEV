@@ -129,10 +129,9 @@ function HeatMap(e) {
     if (count > maxPresses) {
         maxPresses = count;
     }  
-    console.log("sium:" + maxPresses);
-    console.log(count);
     
     ext.UpdateKeyColors(maxPresses);
+   ext.LayoutCountings[document.querySelector("#Keyboard-Layout").value][e.code] = count;
 }
 
 function clearButton(){
@@ -192,7 +191,9 @@ function HeatMapFromFile(text)
 			    let count = parseInt(parent.dataset.pressCount) || 0;
 			    count++;
 			    parent.dataset.pressCount = count;
-
+			     
+			    ext.LayoutCountings[document.querySelector("#Keyboard-Layout").value][code] = count;
+			    
 			    // aggiorna massimo globale
 			    if (count > maxPresses) {
 				maxPresses = count;

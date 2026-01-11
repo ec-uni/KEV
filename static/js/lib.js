@@ -2,6 +2,8 @@ export const layoutNames = ["QWERTY", "Colemak", "QWERTZ", "Workman", "Dvorak", 
 
 export const LayoutResults = {};
 
+export const LayoutCountings = {};
+
 layoutNames.forEach(name => {
 	    LayoutResults[name] = {
 		    	    totalKeyPress: 0,
@@ -11,6 +13,9 @@ layoutNames.forEach(name => {
 		            travelDistance: 0
 		        };
 });
+
+
+
 window.lr = LayoutResults;
 console.log(LayoutResults);
 
@@ -101,6 +106,14 @@ export const KeyCodes = [
     "ControlLeft","MetaLeft","AltLeft","Space","AltRight","Fn","ControlRight"
 ];
 
+layoutNames.forEach(layout => {
+	  LayoutCountings[layout] = {}
+
+	  KeyCodes.forEach(code => {
+		      LayoutCountings[layout][code] = 0
+		    })
+})
+window.ls = LayoutCountings;
 export const KeyScore = {
 	    Escape: 5,
 	    Digit1: 4, Digit2: 3.5, Digit3: 3, Digit4: 2.5, Digit5: 2.5, 
