@@ -366,3 +366,39 @@ export function sleep(ms) {
 		    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+function sanitizeForJSON(obj) {
+  return JSON.parse(
+    JSON.stringify(obj, (_, value) =>
+      typeof value === "number" && Number.isNaN(value) ? null : value
+    )
+  );
+}
+
+function downloadJSON(data, filename) {
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+export function exportLayoutAnalysis() {
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    layouts: layoutNames,
+    results: sanitizeForJSON(window.lr),
+    keyPresses: sanitizeForJSON(window.ls)
+  };
+
+  downloadJSON(payload, "keyboard-layout-analysis.json");
+}
+
+
+

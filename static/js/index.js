@@ -146,6 +146,9 @@ function clearButton(){
     })
 }
 
+
+document.querySelector("#btn-export").addEventListener("click",()=>{ext.exportLayoutAnalysis();});
+
 document.addEventListener('DOMContentLoaded', clearButton);
 
 function RunPress()
