@@ -9,9 +9,23 @@ document.addEventListener("keyup",HandleKey);
 document.getElementById("Keyboard-Layout").addEventListener("change", e => UpdateViewKeys({ type: "layoutChange", value: e.target.value }));
 document.getElementById("Theme").addEventListener("change", e => UpdateViewKeys({type:"themeselection",value: e.target.value}));
 document.getElementById("benchmark").addEventListener("click",RunPress);
+document.getElementById("btn-next")
+    .addEventListener("click", () => Rotate(1));
 
+document.getElementById("btn-previous")
+    .addEventListener("click", () => Rotate(-1));
 let shiftPressed = false, capsLockActive = false;
 
+function Rotate(num)
+{
+    ext.RotateKeyboardLayout(num);
+	const layout =
+        document.querySelector("#Keyboard-Layout").value;
+
+    ext.LoadLayoutHeatmap(layout);
+	Statistics();
+
+}
 function HandleKey(e)
 {
 	UpdateViewKeys(e);

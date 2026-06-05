@@ -352,13 +352,18 @@ export function RetrieveTravelDistance()
 }
 
 
-export function RotateKeyboardLayout(){
-		    const layoutSelect = document.getElementById("Keyboard-Layout");
-		    const options = Array.from(layoutSelect.options);
-		    const currentIndex = layoutSelect.selectedIndex;
-		    const nextIndex = (currentIndex + 1) % options.length;
-		    layoutSelect.selectedIndex = nextIndex;
-		    layoutSelect.dispatchEvent(new Event('change'));
+export function RotateKeyboardLayout(num = 1) {
+    const layoutSelect = document.getElementById("Keyboard-Layout");
+    const options = Array.from(layoutSelect.options);
+
+    const currentIndex = layoutSelect.selectedIndex;
+
+    const nextIndex =
+        ((currentIndex + num) % options.length + options.length)
+        % options.length;
+
+    layoutSelect.selectedIndex = nextIndex;
+    layoutSelect.dispatchEvent(new Event("change"));
 }
 
 
@@ -401,4 +406,25 @@ export function exportLayoutAnalysis() {
 }
 
 
+export function LoadLayoutHeatmap(layout)
+{
+    let max = 0;
 
+    KeyCodes.forEach(code => {
+
+        const key = document.querySelector(
+            `.keyboard-key p[data-code="${code}"]`
+        );
+
+        if(!key) return;
+
+        const count = LayoutCountings[layout][code] || 0;
+
+        key.parentElement.dataset.pressCount = count;
+
+        if(count > max)
+            max = count;
+    });
+
+    UpdateKeyColors(max);
+}
