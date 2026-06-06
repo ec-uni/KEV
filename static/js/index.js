@@ -14,7 +14,38 @@ document.getElementById("btn-next")
 
 document.getElementById("btn-previous")
     .addEventListener("click", () => Rotate(-1));
+
+document.getElementById("btn-mode")
+    .addEventListener("click", () => SwitchMode());
 let shiftPressed = false, capsLockActive = false;
+
+function SwitchMode()
+{
+	console.log("it works");
+    const mode = document.getElementById('btn-mode');
+	//mode.textContent = (mode.textContent === "Live") ? "File" : "Live";
+    const textBox = document.getElementById('battlefield');
+    textBox.value = '';
+    HeatMapReset();
+    StatsReset();
+	if (mode.textContent == "Live") 
+	{
+		mode.textContent = "File";
+		//Nascondi elementi
+		document.getElementById("inputfile").style.display = "block"
+		document.getElementById("benchmark").style.display = "block"
+		document.getElementById("btn-clear").style.display = "none"
+		
+	}	
+	else
+	{
+		mode.textContent = "Live";
+		document.getElementById("inputfile").style.display = "none"
+		document.getElementById("benchmark").style.display = "none"
+		document.getElementById("btn-clear").style.display = "block"
+	}
+		
+}
 
 function Rotate(num)
 {
@@ -164,6 +195,7 @@ function clearButton(){
 document.querySelector("#btn-export").addEventListener("click",()=>{ext.exportLayoutAnalysis();});
 
 document.addEventListener('DOMContentLoaded', clearButton);
+document.addEventListener('DOMContentLoaded', SwitchMode);
 
 function RunPress()
 {
