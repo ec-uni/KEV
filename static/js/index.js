@@ -35,6 +35,11 @@ function SwitchMode()
 		document.getElementById("inputfile").style.display = "block"
 		document.getElementById("benchmark").style.display = "block"
 		document.getElementById("btn-clear").style.display = "none"
+		document.getElementById("btn-previous").style.display ="block"
+		document.getElementById("btn-next").style.display ="block"
+		document.getElementById("prova").style.display = "block"
+		document.getElementById("btn-export").style.display = "block"
+		document.getElementById("battlefield").style.display = "none"
 		
 	}	
 	else
@@ -43,6 +48,12 @@ function SwitchMode()
 		document.getElementById("inputfile").style.display = "none"
 		document.getElementById("benchmark").style.display = "none"
 		document.getElementById("btn-clear").style.display = "block"
+		document.getElementById("btn-previous").style.display ="none"
+		document.getElementById("btn-next").style.display ="none"
+		document.getElementById("prova").style.display = "none"
+		document.getElementById("btn-export").style.display = "none"
+		document.getElementById("battlefield").style.display = "block"
+
 	}
 		
 }
@@ -114,6 +125,17 @@ function UpdateViewKeys(e) {
 
    if(e.type === "layoutChange"){
 		ext.setlayout(e.value);
+    	const mode = document.getElementById('btn-mode');
+		if (mode.textContent == "Live"){
+				console.log("hello world");
+				const textBox = document.getElementById('battlefield');
+    			const clearbutton = document.getElementById('btn-clear');		
+			    	textBox.value = '';
+					textBox.focus();
+					HeatMapReset();
+					StatsReset();
+
+			}
    }
    
    /*if(e.type === "themeselection")
